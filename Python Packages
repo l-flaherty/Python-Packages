@@ -1,0 +1,18 @@
+##Make sure first installed via 'pip install numpy pandas (etc.)' in cmd##
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy as sp
+import openpyxl as xl
+import xlwings as xw
+import datetime
+import multiprocessing
+import subprocess
+import typing
+import argparse
+import dataclasses
+import pathlib
+import re
+import os
+import sys
