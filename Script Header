@@ -1,0 +1,71 @@
+# ============================================================================
+# UNIVERSAL PYTHON ENVIRONMENT BOOTSTRAPPER
+# Place this at the top of every script to ensure consistent package loading
+# LIST ALL YOUR PACKAGES HERE (add any package you've ever used)
+# Format: (pip_name, import_name) or just pip_name if they're the same
+# ============================================================================
+
+PACKAGES = [
+    'numpy',
+    'pandas',
+    'matplotlib',
+    'scipy',
+    'openpyxl',
+    'math',
+    'requests',
+    'xlwings',
+    'holidays',
+    'statsmodels'
+    'datetime',
+    'multiprocessing',
+    'subprocess',
+    'typing',
+    'argparse',
+    'dataclasses',
+    'pathlib',
+    're',
+    'os',
+    'sys',
+    'requests',
+    'json'
+]
+
+import sys
+import subprocess
+import importlib
+
+def ensure_package(package_name, import_name=None):
+    """
+    Ensures a package is installed and imports it.
+    Args:
+        package_name: Name used for pip install (e.g., 'scikit-learn')
+        import_name: Name used for import (e.g., 'sklearn'). If None, uses package_name.
+    """
+    if import_name is None:
+        import_name = package_name
+    
+    try:
+        return importlib.import_module(import_name)
+    except ImportError:
+        print(f"📦 Installing {package_name}...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name, "--quiet"])
+        return importlib.import_module(import_name)
+
+# Auto-install and import all packages
+print("🔧 Bootstrapping Python environment...")
+print(f"📍 Python: {sys.executable}")
+print(f"📍 Version: {sys.version.split()[0]}")
+
+for pkg in PACKAGES:
+    if isinstance(pkg, tuple):
+        pip_name, import_name = pkg
+    else:
+        pip_name = import_name = pkg
+    
+    globals()[import_name.replace('-', '_')] = ensure_package(pip_name, import_name)
+
+print("✅ All packages loaded successfully!\n")
+
+# ============================================================================
+# Your actual script starts here
+# ============================================================================
