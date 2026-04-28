@@ -15,7 +15,7 @@ PACKAGES = [
     'requests',
     'xlwings',
     'holidays',
-    'statsmodels'
+    'statsmodels',
     'datetime',
     'multiprocessing',
     'subprocess',
